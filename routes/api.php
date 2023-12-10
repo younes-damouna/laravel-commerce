@@ -3,7 +3,9 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CartItemController;
+use App\Http\Controllers\OrderItemController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,22 +31,38 @@ Route::controller(AuthController::class)->group(
     // ]
     // ,
     function () {
-    Route::post('login', 'login');
-    Route::post('register', 'register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
-
-});
+        Route::post('login', 'login');
+        Route::post('register', 'register');
+        Route::post('logout', 'logout');
+        Route::post('refresh', 'refresh');
+    }
+);
 // Route::post('/register',[UserController::class,'insert_user']);
-Route::post('/products/add',[ProductController::class,'insert_product']);
-Route::post('/products/edit',[ProductController::class,'update']);
-Route::get('/products',[ProductController::class,'get_products']);
-Route::post('/products/delete',[ProductController::class,'delete']);
+Route::post('/products/add', [ProductController::class, 'insert_product']);
+Route::post('/products/edit', [ProductController::class, 'update']);
+Route::get('/products', [ProductController::class, 'get_products']);
+Route::post('/products/delete', [ProductController::class, 'delete']);
 
-Route::post('/carts/add',[CartItemController::class,'add_to_cart']);
-Route::post('/carts/remove',[CartItemController::class,'remove_cart_item']);
+Route::post('/carts/add', [CartItemController::class, 'add_to_cart']);
+Route::post('/carts/remove', [CartItemController::class, 'remove_cart_item']);
 
-Route::post('/carts/get_user_cart',[CartItemController::class,'get_user_cart']);
+Route::post('/carts/get_user_cart', [CartItemController::class, 'get_user_cart']);
+
+
+Route::post('/orders/add', [OrderItemController::class, 'add_to_order']);
+Route::post('/orders/remove', [OrderItemController::class, 'remove_order_item']);
+
+Route::post('/orders/get_user_orders', [OrderItemController::class, 'get_user_order']);
+
+
+Route::post('/transactions/add', [TransactionController::class, 'add_transaction']);
+Route::post('/transactions/update', [TransactionController::class, 'update_transactions']);
+
+Route::post('/transactions/get_user_transactions', [TransactionController::class, 'get_transactions']);
+
+
+
+
 
 
 
